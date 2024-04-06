@@ -4,17 +4,20 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.EqualsAndHashCode;
 
+import java.util.Set;
 import java.util.HashSet;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
 import javax.validation.constraints.Size;
 
 @Setter
 @Getter
-@EqualsAndHashCode
 @Entity
-public class Song implements Serializable {
+@EqualsAndHashCode
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"name"})
+})
+public class Genre implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,12 +26,6 @@ public class Song implements Serializable {
     @Basic(optional = false)
     private String name;
 
-    @ManyToOne(optional = false)
-    private Band band;
-
-    @ManyToMany(mappedBy = "songs", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Genre> genres = new HashSet<>();
-
-    @OneToMany
-    private Set<Song> song = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Song> songs = new HashSet<>();
 }

@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 @Getter
 @EqualsAndHashCode
 @Entity
-public class Song implements Serializable {
+public class Band implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,12 +23,6 @@ public class Song implements Serializable {
     @Basic(optional = false)
     private String name;
 
-    @ManyToOne(optional = false)
-    private Band band;
-
-    @ManyToMany(mappedBy = "songs", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Genre> genres = new HashSet<>();
-
-    @OneToMany
-    private Set<Song> song = new HashSet<>();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Song> songs = new HashSet<>();
 }
