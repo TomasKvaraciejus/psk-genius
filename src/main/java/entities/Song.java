@@ -1,19 +1,22 @@
-package com.example.geniusgeniusgenius.entities;
+package entities;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.EqualsAndHashCode;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 import javax.validation.constraints.Size;
 
 @Setter
 @Getter
 @EqualsAndHashCode
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Song.findAll", query = "select b from Song as b"),
+})
 public class Song implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +29,6 @@ public class Song implements Serializable {
     @ManyToOne(optional = false)
     private Band band;
 
-    @ManyToMany(mappedBy = "songs", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Genre> genres = new HashSet<>();
-
-    @OneToMany
-    private Set<Song> song = new HashSet<>();
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Genre> genres = new ArrayList<>();
 }

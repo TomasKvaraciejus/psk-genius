@@ -6,7 +6,46 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
+    <head>
+        <title>Index</title>
+        <h:link outcome="songs">songs</h:link>
+        <h:link outcome="bands">bands</h:link>
+        <h:link outcome="genres">genres</h:link>
+    </head>
     <h:outputLabel value="hola"/>
-    <h:outputLabel value="hola"/>
+    <br/>
+    <h:form>
+        <h:outputLabel for="band-name" value="Band Name"/>
+        <h:inputTextarea id="band-name" value="#{bands.bandToCreate.name}" required="true"/>
+
+        <h:commandButton value="Create band" actionListener="#{bands.createBand}"
+                         action="bands?faces-redirect=true"/>
+    </h:form>
+    <br/>
+    <h:form>
+        <h:outputLabel for="song-name" value="Song Name"/>
+        <h:inputTextarea id="song-name" value="#{songs.songToCreate.name}" required="true"/>
+
+        <h:outputLabel for="song-band" value="Song Band Name"/>
+        <h:inputTextarea id="song-band" value="#{songs.songBandName}" required="true"/>
+
+        <h2>Song Genre</h2>
+        <h:selectManyCheckbox value="#{songs.songGenres}" required="true"
+                              requiredMessage="genre">
+            <f:selectItems value="#{genres.allGenres}" var="genre"
+                           itemLabel="#{genre.name}" itemValue="#{genre.id}"/>
+        </h:selectManyCheckbox>
+
+        <h:commandButton value="Create song" actionListener="#{songs.createSong}"
+                         action="songs?faces-redirect=true"/>
+    </h:form>
+    <br/>
+    <h:form>
+        <h:outputLabel for="genre-name" value="Genre Name"/>
+        <h:inputTextarea id="genre-name" value="#{genres.genreToCreate.name}" required="true"/>
+
+        <h:commandButton value="Create genre" actionListener="#{genres.createGenre}"
+                         action="genres?faces-redirect=true"/>
+    </h:form>
 </f:view>
 </html>

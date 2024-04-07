@@ -1,4 +1,4 @@
-package com.example.geniusgeniusgenius.entities;
+package entities;
 
 import lombok.Getter;
 import lombok.Setter;
