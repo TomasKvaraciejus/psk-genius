@@ -1,6 +1,7 @@
 package usecases;
 
 import entities.Band;
+import entities.Comment;
 import entities.Song;
 import entities.Genre;
 import lombok.Getter;
@@ -10,12 +11,15 @@ import persistence.GenreDAO;
 import persistence.SongDAO;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Model;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Model
 public class Songs implements Serializable {
@@ -46,10 +50,20 @@ public class Songs implements Serializable {
 
     @Getter
     @Setter
+    private String songDuration;
+
+    @Getter
+    @Setter
+    private String songLyrics;
+
+    @Getter
+    @Setter
     private List<Long> songGenres = new ArrayList<>();
 
     @Transactional
     public void createSong() {
+        songToCreate.setDuration(Long.parseLong(songDuration));
+
         Band band = bandDAO.findByName(songBandName);
         songToCreate.setBand(band);
 

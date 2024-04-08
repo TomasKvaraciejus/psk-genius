@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 @EqualsAndHashCode
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "Song.findAll", query = "select b from Song as b"),
+        @NamedQuery(name = "Song.findAll", query = "select s from Song as s"),
 })
 public class Song implements Serializable {
     @Id
@@ -26,9 +26,19 @@ public class Song implements Serializable {
     @Basic(optional = false)
     private String name;
 
+    @Basic(optional = false)
+    private Long duration;
+
+    @Basic
+    private String lyrics;
+
     @ManyToOne(optional = false)
     private Band band;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Genre> genres = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "song_id")
+    private List<Comment> comments = new ArrayList<>();
 }

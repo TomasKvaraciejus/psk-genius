@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:outputLabel value="hola"/>
+    <h1>song: #{singleSong.song.name} (#{singleSong.song.band.name}) :)</h1>
+    <h1>duration: #{singleSong.songDuration()}</h1>
+    <h1>lyrics:</h1>
+    <h:form>
+        <h:outputText rendered="#{!singleSong.editingLyrics}" value="#{singleSong.lyrics()}"/>
+        <h:inputTextarea rendered="#{singleSong.editingLyrics}" value="#{singleSong.updatedLyrics}"/>
+
+        <br/>
+        <h:commandButton value="Update lyrics" actionListener="#{singleSong.ToggleIsEditingLyrics()}"/>
+    </h:form>
+    <h1>comments:</h1>
+    <h3>leave your own comment:</h3>
+    <h:form>
+        <h4>user:</h4>
+        <h:inputTextarea value="#{singleSong.commentToPostUser}" required="true"/>
+        <h4>comment:</h4>
+        <h:inputTextarea value="#{singleSong.commentToPostContent}"/>
+        <br/>
+        <h:commandButton value="Post comment" actionListener="#{singleSong.PostComment()}" required="true"/>
+    </h:form>
+    <ui:repeat value="#{singleSong.song.comments}" var="comment">
+        <h3>#{comment.user}</h3>
+        <p>#{comment.content}</p>
+    </ui:repeat>
+</f:view>
+</html>

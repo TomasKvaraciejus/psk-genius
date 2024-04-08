@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
         @UniqueConstraint(columnNames = {"name"})
 })
 @NamedQueries({
-        @NamedQuery(name = "Genre.findAll", query = "select b from Genre as b"),
+        @NamedQuery(name = "Genre.findAll", query = "select g from Genre as g"),
 })
 public class Genre implements Serializable {
     @Id

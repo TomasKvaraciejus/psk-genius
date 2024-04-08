@@ -3,6 +3,7 @@ package persistence;
 import entities.Genre;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.List;

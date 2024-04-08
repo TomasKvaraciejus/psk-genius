@@ -5,12 +5,57 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <head>
+        <title>Songs :)</title>
+    </head>
+    <style type="">
+        p {
+            display: inline
+        }
+    </style>
+</h:head>
 <f:view>
     <h:outputLabel value="hola"/>
+    <h1>add new song:</h1>
+    <h:form>
+        <h:outputLabel for="song-name" value="Song Name"/>
+        <h:inputTextarea id="song-name" value="#{songs.songToCreate.name}" required="true"/>
+
+        <h:outputLabel for="song-band" value="Song Band Name"/>
+        <h:inputTextarea id="song-band" value="#{songs.songBandName}" required="true"/>
+
+        <h:outputLabel for="song-duration" value="Song Duration (in seconds)"/>
+        <h:inputTextarea id="song-duration" value="#{songs.songDuration}" required="true"/>
+
+        <h:outputLabel for="song-lyrics" value="Song Lyrics (optional)"/>
+        <h:inputTextarea id="song-lyrics" value="#{songs.songLyrics}" required="false"/>
+
+        <h2>Song Genre</h2>
+        <h:selectManyCheckbox value="#{songs.songGenres}" required="true"
+                              requiredMessage="genre">
+            <f:selectItems value="#{genres.allGenres}" var="genre"
+                           itemLabel="#{genre.name}" itemValue="#{genre.id}"/>
+        </h:selectManyCheckbox>
+
+        <h:commandButton value="Create song" actionListener="#{songs.createSong}"
+                         action="songs?faces-redirect=true"/>
+    </h:form>
+    <br/>
     <h1>songs :)</h1>
     <ol>
         <ui:repeat value="#{songs.allSongs}" var="song">
-            <li><h:link value="#{song.band.name} - #{song.name} (#{song.genres[0].name})" outcome="song?songId=#{song.id}"/></li>
+            <li>
+                <h:link value="#{song.band.name}" outcome="bands"/>
+                <p> - </p>
+                <h:link value="#{song.name}" outcome="single-song?songId=#{song.id}"/>
+                <p>(</p>
+                <ui:repeat value="#{song.genres}" var="genre" varStatus="status">
+                    <h:link value="#{genre.name}" outcome="genres"/>
+                    <p>#{status.last ? '' : ', '}</p>
+                </ui:repeat>
+                <p>)</p>
+            </li>
         </ui:repeat>
     </ol>
 </f:view>

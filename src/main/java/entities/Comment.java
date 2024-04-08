@@ -12,6 +12,9 @@ import javax.validation.constraints.Size;
 @Getter
 @EqualsAndHashCode
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Comment.findAll", query = "select c from Comment as c")
+})
 public class Comment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -22,7 +22,7 @@ public class Bands implements Serializable {
     private Band bandToCreate = new Band();
 
     @Getter
-    private List<Band> allBands;
+    private List<Band>   allBands;
 
     @PostConstruct
     public void init() {
