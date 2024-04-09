@@ -3,33 +3,48 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
     <head>
-        <title>Index</title>
+        <title>index :)</title>
     </head>
-    <ul>
-        <li><h:link outcome="songs">songs</h:link></li>
-        <li><h:link outcome="bands">bands</h:link></li>
-        <li><h:link outcome="genres">genres</h:link></li>
-    </ul>
-    <h:outputLabel value="hola"/>
-    <br/>
-    <h:form>
-        <h:outputLabel for="band-name" value="Band Name"/>
-        <h:inputTextarea id="band-name" value="#{bands.bandToCreate.name}" required="true"/>
-
-        <h:commandButton value="Create band" actionListener="#{bands.createBand}"
-                         action="bands?faces-redirect=true"/>
-    </h:form>
-    <br/>
-    <h:form>
-        <h:outputLabel for="genre-name" value="Genre Name"/>
-        <h:inputTextarea id="genre-name" value="#{genres.genreToCreate.name}" required="true"/>
-
-        <h:commandButton value="Create genre" actionListener="#{genres.createGenre}"
-                         action="genres?faces-redirect=true"/>
-    </h:form>
+    <style type="">
+        body, head{
+            font-family: Verdana;
+            margin: 24px;
+        }
+        p {
+            display: inline
+        }
+        h1 {
+            text-align: center;
+        }
+        .header {
+            font-size: 20px;
+            text-align: center;
+        }
+        .header ul{
+            list-style: none;
+            padding: 0;
+        }
+        .header ul li{
+            display: inline;
+        }
+        .inputField{
+            padding: 6px;
+            font-size: 16px;
+            height: 22px;
+            width: 200px;
+            resize: none;
+        }
+    </style>
+    <h1>index :)</h1>
+    <div class="header">
+        <ul>
+            <li><h:link outcome="songs">songs</h:link></li>
+            <li><h:link outcome="bands">bands</h:link></li>
+            <li><h:link outcome="genres">genres</h:link></li>
+        </ul>
+    </div>
 </f:view>
 </html>

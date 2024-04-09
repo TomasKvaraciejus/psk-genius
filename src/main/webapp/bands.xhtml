@@ -6,8 +6,57 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
-    <h:outputLabel value="hola"/>
+    <head>
+        <title>bands :)</title>
+    </head>
+    <style type="">
+        body, head{
+            font-family: Verdana;
+            margin: 24px;
+        }
+        p {
+            display: inline
+        }
+        h1 {
+            text-align: center;
+        }
+        .header {
+            font-size: 20px;
+            text-align: center;
+        }
+        .header ul{
+            list-style: none;
+            padding: 0;
+        }
+        .header ul li{
+            display: inline;
+        }
+        .inputField{
+            padding: 6px;
+            font-size: 16px;
+            height: 22px;
+            width: 200px;
+            resize: none;
+        }
+    </style>
     <h1>bands :)</h1>
+    <div class="header">
+        <ul>
+            <li><h:link outcome="songs">songs</h:link></li>
+            <li><h:link outcome="bands">bands</h:link></li>
+            <li><h:link outcome="genres">genres</h:link></li>
+        </ul>
+    </div>
+    <h3>add a new band to the catalog:</h3>
+    <h:form>
+        <h:outputLabel for="band-name" value="band name:"/>
+        <br/>
+        <h:inputTextarea styleClass="inputField" id="band-name" value="#{bands.bandToCreate.name}" required="true"/>
+        <br/>
+        <h:commandButton value="create band" actionListener="#{bands.createBand}"
+                         action="bands?faces-redirect=true"/>
+    </h:form>
+    <h3>bands:</h3>
     <ol>
         <ui:repeat value="#{bands.allBands}" var="band">
             <li>
@@ -15,7 +64,7 @@
                 <ol>
                     <ui:repeat value="#{band.songs}" var="song">
                         <li>
-                            <p>#{song.name}</p>
+                            <h:link value="#{song.name}" outcome="single-song?songId=#{song.id}"/>
                         </li>
                     </ui:repeat>
                 </ol>

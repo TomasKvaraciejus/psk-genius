@@ -6,16 +6,68 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
-    <h:outputLabel value="hola"/>
+    <head>
+        <title>genres :)</title>
+    </head>
+    <style type="">
+        body, head{
+            font-family: Verdana;
+            margin: 24px;
+        }
+        p {
+            display: inline
+        }
+        h1 {
+            text-align: center;
+        }
+        .header {
+            font-size: 20px;
+            text-align: center;
+        }
+        .header ul{
+            list-style: none;
+            padding: 0;
+        }
+        .header ul li{
+            display: inline;
+        }
+        .inputField{
+            padding: 6px;
+            font-size: 16px;
+            height: 22px;
+            width: 200px;
+            resize: none;
+        }
+        .entryList{
+            list-style: none;
+        }
+    </style>
     <h1>genres :)</h1>
-    <ol>
+    <div class="header">
+        <ul>
+            <li><h:link outcome="songs">songs</h:link></li>
+            <li><h:link outcome="bands">bands</h:link></li>
+            <li><h:link outcome="genres">genres</h:link></li>
+        </ul>
+    </div>
+    <h3>add a new genre to the catalog:</h3>
+    <h:form>
+        <h:outputLabel for="genre-name" value="genre name:"/>
+        <br/>
+        <h:inputTextarea styleClass="inputField" id="genre-name" value="#{genres.genreToCreate.name}" required="true"/>
+        <br/>
+        <h:commandButton value="create genre" actionListener="#{genres.createGenre}"
+                         action="genres?faces-redirect=true"/>
+    </h:form>
+    <h3>genres:</h3>
+    <ol class="entryList">
         <ui:repeat value="#{genres.allGenres}" var="genre">
             <li>
                 <p>#{genre.name}</p>
                 <ol>
                     <ui:repeat value="#{genre.songs}" var="song">
                         <li>
-                            <p>#{song.name}</p>
+                            <h:link value="#{song.name}" outcome="single-song?songId=#{song.id}"/>
                         </li>
                     </ui:repeat>
                 </ol>

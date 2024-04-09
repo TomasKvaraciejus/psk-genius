@@ -79,6 +79,15 @@ public class SingleSong implements Serializable {
         this.songDAO.update(this.song);
     }
 
+    @Transactional
+    public void DeleteComment(Comment comment)
+    {
+        this.song.getComments().remove(comment);
+        this.songDAO.update(this.song);
+
+        this.commentDAO.delete(comment);
+    }
+
     @PostConstruct
     public void init() {
         Map<String, String> requestParameters =

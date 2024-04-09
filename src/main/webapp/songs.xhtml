@@ -7,33 +7,74 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <head>
-        <title>Songs :)</title>
+        <title>songs :)</title>
     </head>
     <style type="">
+        body, head{
+            font-family: Verdana;
+            margin: 24px;
+        }
         p {
             display: inline
         }
+        h1 {
+            text-align: center;
+        }
+        .header {
+            font-size: 20px;
+            text-align: center;
+        }
+        .header ul{
+            list-style: none;
+            padding: 0;
+        }
+        .header ul li{
+            display: inline;
+        }
+        .inputField{
+            padding: 6px;
+            font-size: 16px;
+            height: 22px;
+            width: 200px;
+            resize: none;
+        }
     </style>
+    <h1>songs :)</h1>
+    <div class="header">
+        <ul>
+            <li><h:link outcome="songs">songs</h:link></li>
+            <li><h:link outcome="bands">bands</h:link></li>
+            <li><h:link outcome="genres">genres</h:link></li>
+        </ul>
+    </div>
 </h:head>
 <f:view>
-    <h:outputLabel value="hola"/>
-    <h1>add new song:</h1>
+    <h3>add new song:</h3>
     <h:form>
-        <h:outputLabel for="song-name" value="Song Name"/>
-        <h:inputTextarea id="song-name" value="#{songs.songToCreate.name}" required="true"/>
+        <h:outputLabel for="song-name" value="name"/>
+        <br/>
+        <h:inputTextarea styleClass="inputField" id="song-name" value="#{songs.songToCreate.name}" required="true"/>
+        <br/>
 
-        <h:outputLabel for="song-band" value="Song Band Name"/>
-        <h:inputTextarea id="song-band" value="#{songs.songBandName}" required="true"/>
+        <h:outputLabel for="song-band" value="band"/>
+        <br/>
+        <h:inputTextarea styleClass="inputField" id="song-band" value="#{songs.songBandName}" required="true"/>
+        <br/>
 
-        <h:outputLabel for="song-duration" value="Song Duration (in seconds)"/>
-        <h:inputTextarea id="song-duration" value="#{songs.songDuration}" required="true"/>
+        <h:outputLabel for="song-duration" value="duration (in seconds)"/>
+        <br/>
+        <h:inputTextarea styleClass="inputField" id="song-duration" value="#{songs.songDuration}" required="true"/>
+        <br/>
 
-        <h:outputLabel for="song-lyrics" value="Song Lyrics (optional)"/>
-        <h:inputTextarea id="song-lyrics" value="#{songs.songLyrics}" required="false"/>
+        <h:outputLabel for="song-lyrics" value="lyrics (optional)"/>
+        <br/>
+        <h:inputTextarea styleClass="inputField" id="song-lyrics" value="#{songs.songLyrics}" required="false"/>
+        <br/>
 
-        <h2>Song Genre</h2>
-        <h:selectManyCheckbox value="#{songs.songGenres}" required="true"
-                              requiredMessage="genre">
+        <h:outputLabel for="song-genre" value="genre(s)"/>
+        <br/>
+        <h:selectManyCheckbox id="song-genre" value="#{songs.songGenres}" required="true"
+                              requiredMessage="genre" layout="pageDirection">
             <f:selectItems value="#{genres.allGenres}" var="genre"
                            itemLabel="#{genre.name}" itemValue="#{genre.id}"/>
         </h:selectManyCheckbox>
@@ -42,7 +83,7 @@
                          action="songs?faces-redirect=true"/>
     </h:form>
     <br/>
-    <h1>songs :)</h1>
+    <h3>songs :)</h3>
     <ol>
         <ui:repeat value="#{songs.allSongs}" var="song">
             <li>

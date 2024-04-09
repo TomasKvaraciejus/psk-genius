@@ -6,30 +6,88 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <f:view>
-    <h:outputLabel value="hola"/>
-    <h1>song: #{singleSong.song.name} (#{singleSong.song.band.name}) :)</h1>
-    <h1>duration: #{singleSong.songDuration()}</h1>
-    <h1>lyrics:</h1>
+    <head>
+        <title>#{singleSong.song.name} :)</title>
+    </head>
+    <style type="">
+        body, head{
+            font-family: Verdana;
+            margin: 24px;
+        }
+        p {
+            display: inline
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        .header {
+            font-size: 20px;
+            text-align: center;
+        }
+        .header ul{
+            list-style: none;
+            padding: 0;
+        }
+        .header ul li{
+            display: inline;
+        }
+        .inputField{
+            padding: 6px;
+            font-size: 16px;
+            height: 22px;
+            width: 200px;
+            resize: none;
+        }
+        .comment{
+            border: 1px;
+            border-color: black;
+        }
+        .lyrics{
+            margin-left: 35%;
+            width: 30%;
+            resize: vertical;
+            height: auto;
+        }
+    </style>
+    <h1>#{singleSong.song.name} (#{singleSong.song.band.name}) :)</h1>
+    <div class="header">
+        <ul>
+            <li><h:link outcome="songs">songs</h:link></li>
+            <li><h:link outcome="bands">bands</h:link></li>
+            <li><h:link outcome="genres">genres</h:link></li>
+        </ul>
+    </div>
+    <h2>duration: #{singleSong.songDuration()}s</h2>
+    <h2>lyrics:</h2>
     <h:form>
-        <h:outputText rendered="#{!singleSong.editingLyrics}" value="#{singleSong.lyrics()}"/>
-        <h:inputTextarea rendered="#{singleSong.editingLyrics}" value="#{singleSong.updatedLyrics}"/>
+        <pre class="lyrics" >
+            <h:outputText rendered="#{!singleSong.editingLyrics}" value="#{singleSong.lyrics()}"/>
+        </pre>
+        <h:inputTextarea styleClass="lyrics" rendered="#{singleSong.editingLyrics}" value="#{singleSong.updatedLyrics}"/>
 
         <br/>
-        <h:commandButton value="Update lyrics" actionListener="#{singleSong.ToggleIsEditingLyrics()}"/>
+        <h:commandButton style="display: block; margin: auto" value="update lyrics" actionListener="#{singleSong.ToggleIsEditingLyrics()}"/>
     </h:form>
-    <h1>comments:</h1>
+    <h2 style="text-align: left">comments:</h2>
     <h3>leave your own comment:</h3>
     <h:form>
         <h4>user:</h4>
-        <h:inputTextarea value="#{singleSong.commentToPostUser}" required="true"/>
+        <h:inputTextarea style="text-align: center" styleClass="inputField" value="#{singleSong.commentToPostUser}" required="true"/>
         <h4>comment:</h4>
-        <h:inputTextarea value="#{singleSong.commentToPostContent}"/>
+        <h:inputTextarea styleClass="inputField" value="#{singleSong.commentToPostContent}"/>
         <br/>
-        <h:commandButton value="Post comment" actionListener="#{singleSong.PostComment()}" required="true"/>
+        <br/>
+        <h:commandButton value="post comment" actionListener="#{singleSong.PostComment()}"/>
     </h:form>
     <ui:repeat value="#{singleSong.song.comments}" var="comment">
-        <h3>#{comment.user}</h3>
-        <p>#{comment.content}</p>
+        <h:form>
+            <div class="comment">
+                <h3>#{comment.user}</h3>
+                <p>#{comment.content}</p>
+                <br/>
+                <h:commandButton value="Delete" actionListener="#{singleSong.DeleteComment(comment)}"/>
+            </div>
+        </h:form>
     </ui:repeat>
 </f:view>
 </html>
