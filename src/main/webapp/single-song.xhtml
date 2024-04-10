@@ -72,9 +72,9 @@
     <h3>leave your own comment:</h3>
     <h:form>
         <h4>user:</h4>
-        <h:inputTextarea style="text-align: center" styleClass="inputField" value="#{singleSong.commentToPostUser}" required="true"/>
+        <h:inputTextarea styleClass="inputField" value="#{singleSong.commentToPostUser}" required="true"/>
         <h4>comment:</h4>
-        <h:inputTextarea styleClass="inputField" value="#{singleSong.commentToPostContent}"/>
+        <h:inputTextarea styleClass="inputField" value="#{singleSong.commentToPostContent}" required="true"/>
         <br/>
         <br/>
         <h:commandButton value="post comment" actionListener="#{singleSong.PostComment()}"/>
@@ -85,7 +85,7 @@
                 <h3>#{comment.user}</h3>
                 <p>#{comment.content}</p>
                 <br/>
-                <h:commandButton value="Delete" actionListener="#{singleSong.DeleteComment(comment)}"/>
+                <h:commandButton value="delete" actionListener="#{singleSong.DeleteComment(comment)}"/>
             </div>
         </h:form>
     </ui:repeat>

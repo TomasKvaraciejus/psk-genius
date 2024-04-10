@@ -64,6 +64,8 @@ public class Songs implements Serializable {
     public void createSong() {
         songToCreate.setDuration(Long.parseLong(songDuration));
 
+        songToCreate.setLyrics(songLyrics);
+
         Band band = bandDAO.findByName(songBandName);
         songToCreate.setBand(band);
 
