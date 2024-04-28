@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Model
-@SessionScoped
+@ViewScoped
 public class SingleSong implements Serializable {
     @Inject
     private SongDAO songDAO;
