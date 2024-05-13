@@ -16,6 +16,6 @@
     </interceptors>
 
     <decorators>
-        <!--<class>services.SongViewCountDecorator</class>-->
+        <class>services.SongViewCountDecorator</class>
     </decorators>
 </beans>

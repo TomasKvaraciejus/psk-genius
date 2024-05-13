@@ -22,6 +22,10 @@ public class Song implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Basic
+    @Column(name = "PAGE_VIEWCOUNT")
+    private Integer viewCount = 0;
+
     @Version
     @Column(name = "OPT_LOCK_VERSION")
     private Integer version;

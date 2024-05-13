@@ -5,6 +5,7 @@ import entities.Song;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
@@ -17,6 +18,7 @@ public class SongDAO implements IDAO<Song> {
         return em.createNamedQuery("Song.findAll", Song.class).getResultList();
     }
 
+    @Transactional
     public Song findById(long id) {
         return em.find(Song.class, id);
     }
