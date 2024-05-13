@@ -64,7 +64,11 @@
         <ui:repeat value="#{genres.allGenres}" var="genre">
             <li>
                 <p>#{genre.name}</p>
-                <ol>
+                <h:form>
+                    <h:commandButton value="load songs" actionListener="#{genreSongLoader.loadGenreSongs(genre.id)}" rendered="#{!genreSongLoader.genresWithLoadedSongs.containsKey(genre.id)}"/>
+                    <h:outputLabel rendered="#{(genreSongLoader.genresWithLoadedSongs.containsKey(genre.id) &amp;&amp; !genreSongLoader.genresWithLoadedSongs.get(genre.id).isDone())}" value="loading songs..."/>
+                </h:form>
+                <ol style="display: #{(genreSongLoader.genresWithLoadedSongs.containsKey(genre.id) &amp;&amp; genreSongLoader.genresWithLoadedSongs.get(genre.id).isDone()) ? 'block' : 'none'}">
                     <ui:repeat value="#{genre.songs}" var="song">
                         <li>
                             <h:link value="#{song.name}" outcome="single-song?songId=#{song.id}"/>
