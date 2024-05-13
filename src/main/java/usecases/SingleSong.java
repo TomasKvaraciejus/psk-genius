@@ -57,12 +57,25 @@ public class SingleSong implements Serializable {
     @Setter
     private String commentToPostContent;
 
+    @Getter
+    @Setter
+    private boolean hasSongVersionMismatch = false;
+
     @Transactional
     public void ToggleIsEditingLyrics()
     {
         if(isEditingLyrics && !updatedLyrics.equals(new String())) {
-            this.song.setLyrics(updatedLyrics);
-            this.songDAO.update(this.song);
+            try {
+                this.song.setLyrics(updatedLyrics);
+                this.songDAO.update(this.song);
+                hasSongVersionMismatch = false;
+            }
+            catch (OptimisticLockException e){
+                hasSongVersionMismatch = true;
+            }
+            finally {
+                this.song = songDAO.findById(song.getId());
+            }
         }
 
         isEditingLyrics = !isEditingLyrics;

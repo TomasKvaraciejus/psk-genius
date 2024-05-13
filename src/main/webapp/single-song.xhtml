@@ -65,6 +65,8 @@
         </pre>
         <h:inputTextarea styleClass="lyrics" rendered="#{singleSong.editingLyrics}" value="#{singleSong.updatedLyrics}"/>
 
+        <h:outputLabel style="color: red;" rendered="#{singleSong.hasSongVersionMismatch}">Issue updating song lyrics. Please try again.</h:outputLabel>
+
         <br/>
         <h:commandButton style="display: block; margin: auto" value="update lyrics" actionListener="#{singleSong.ToggleIsEditingLyrics()}"/>
     </h:form>
