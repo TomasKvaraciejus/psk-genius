@@ -9,6 +9,7 @@ import lombok.Setter;
 import persistence.BandDAO;
 import persistence.GenreDAO;
 import persistence.SongDAO;
+import services.SongFilter;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
@@ -59,6 +60,21 @@ public class Songs implements Serializable {
     @Getter
     @Setter
     private List<Long> songGenres = new ArrayList<>();
+
+    @Inject
+    private SongFilter songFilter;
+
+    @Getter
+    @Setter
+    private List<Long> filterGenreIds = new ArrayList<>();
+
+    @Getter
+    @Setter
+    private Long filterBandId;
+
+    public void filterSongs(){
+        this.allSongs = songFilter.filterSongs(songDAO.findAll(), filterGenreIds, filterBandId);
+    }
 
     @Transactional
     public void createSong() {

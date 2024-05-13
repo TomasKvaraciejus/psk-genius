@@ -84,6 +84,21 @@
     </h:form>
     <br/>
     <h3>songs :)</h3>
+    <h4>filters:</h4>
+    <h:form>
+        <h:selectManyCheckbox id="filter-genre" value="#{songs.filterGenreIds}" required="false"
+                              requiredMessage="genres" layout="pageDirection">
+            <f:selectItems value="#{genres.allGenres}" var="genre"
+                           itemLabel="#{genre.name}" itemValue="#{genre.id}"/>
+        </h:selectManyCheckbox>
+        <h:selectOneListbox id="filter-band" value="#{songs.filterBandId}" required="false"
+                            requiredMessage="band" layout="pageDirection">
+            <f:selectItem itemLabel="none" itemValue="#{null}"/>
+            <f:selectItems value="#{bands.allBands}" var="band"
+                           itemLabel="#{band.name}" itemValue="#{band.id}"/>
+        </h:selectOneListbox>
+        <h:commandButton value="apply filters" actionListener="#{songs.filterSongs}"/>
+    </h:form>
     <ol>
         <ui:repeat value="#{songs.allSongs}" var="song">
             <li>

@@ -5,4 +5,17 @@
         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                       http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
         bean-discovery-mode="annotated">
+
+    <alternatives>
+        <class>services.AndSongFilter</class>
+        <!-- <class>services.OrRecipeFilter</class> -->
+    </alternatives>
+
+    <interceptors>
+        <!--<class>services.PerformanceLoggingInterceptor</class>-->
+    </interceptors>
+
+    <decorators>
+        <!--<class>services.SongViewCountDecorator</class>-->
+    </decorators>
 </beans>
