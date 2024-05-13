@@ -74,6 +74,8 @@ public class Songs implements Serializable {
             genres.add(genreDAO.findById(genreId));
         }
         songToCreate.setGenres(genres);
+        songToCreate.setComments(new ArrayList<Comment>() {
+        });
 
         this.songDAO.save(songToCreate);
     }

@@ -54,14 +54,14 @@
     <h:form>
         <h:outputLabel for="genre-name" value="genre name:"/>
         <br/>
-        <h:inputTextarea styleClass="inputField" id="genre-name" value="#{genresMyBatis.genreToCreate.name}" required="true"/>
+        <h:inputTextarea styleClass="inputField" id="genre-name" value="#{genres.genreToCreate.name}" required="true"/>
         <br/>
-        <h:commandButton value="create genre" actionListener="#{genresMyBatis.createGenre}"
+        <h:commandButton value="create genre" actionListener="#{genres.createGenre}"
                          action="genres?faces-redirect=true"/>
     </h:form>
     <h3>genres:</h3>
     <ol class="entryList">
-        <ui:repeat value="#{genresMyBatis.allGenres}" var="genre">
+        <ui:repeat value="#{genres.allGenres}" var="genre">
             <li>
                 <p>#{genre.name}</p>
                 <ol>
