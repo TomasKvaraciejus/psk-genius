@@ -9,6 +9,7 @@ import lombok.Setter;
 import persistence.BandDAO;
 import persistence.GenreDAO;
 import persistence.SongDAO;
+import services.LogPerformance;
 import services.SongFilter;
 
 import javax.annotation.PostConstruct;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Model
+@LogPerformance
 public class Songs implements Serializable {
     @Inject
     private SongDAO songDAO;

@@ -1,4 +1,4 @@
-package usecases;
+package services;
 
 import entities.Genre;
 import lombok.Getter;
@@ -21,13 +21,6 @@ public class GenreSongLoader implements Serializable
 
     public void loadGenreSongs(Long genreId)
     {
-        genresWithLoadedSongs.put(genreId, CompletableFuture.runAsync(() -> loadSongsAsync()));
-    }
-
-    private void loadSongsAsync(){
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-        }
+        genresWithLoadedSongs.put(genreId, CompletableFuture.runAsync(() -> {}));
     }
 }

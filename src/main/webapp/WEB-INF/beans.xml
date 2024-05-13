@@ -8,11 +8,11 @@
 
     <alternatives>
         <class>services.AndSongFilter</class>
-        <!-- <class>services.OrRecipeFilter</class> -->
+        <!-- <class>services.OrSongFilter</class> -->
     </alternatives>
 
     <interceptors>
-        <!--<class>services.PerformanceLoggingInterceptor</class>-->
+        <class>services.PerformanceLoggingInterceptor</class>
     </interceptors>
 
     <decorators>
