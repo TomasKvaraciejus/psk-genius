@@ -29,6 +29,6 @@ public class Genre implements Serializable {
     @Basic(optional = false)
     private String name;
 
-    @ManyToMany(mappedBy = "genres", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "genres", fetch = FetchType.LAZY)
     private List<Song> songs = new ArrayList<>();
 }
